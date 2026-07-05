@@ -55,4 +55,23 @@ pipeline {
             }
         }
     }
+    // Email Notifications settings code - started
+    post {
+        always {
+            echo "Archiving workspace notification logs..."
+        }
+        success {
+            echo "Sending Notification Email..."
+            echo "To: vivekrajendranbe@gmail.com"
+            echo "Subject: Jenkins Build Success: Job ${env.JOB_NAME} [Build #${env.BUILD_NUMBER}]"
+            echo "Body: The pipeline completed successfully. All automated integration and deployment tasks are verified green."
+        }
+        failure {
+            echo "Sending Notification Email..."
+            echo "To: vivekrajendranbe@gmail.com"
+            echo "Subject: Jenkins Build FAILED: Job ${env.JOB_NAME} [Build #${env.BUILD_NUMBER}]"
+            echo "Body: ATTENTION: The pipeline execution encountered an exit break during the build stage. Review the SCM console output logs immediately."
+        }
+    }
+    // Email Notifications settings code - finished
 }
